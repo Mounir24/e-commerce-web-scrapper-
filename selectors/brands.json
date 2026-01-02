@@ -1,0 +1,6 @@
+{
+  "brand_item": ".tvbrand-page-block .brand",
+  "brand_name": ".product-title a h6",
+  "brand_link": ".product-title a",
+  "brand_image": ".brand-img img"
+}

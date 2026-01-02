@@ -1,0 +1,44 @@
+
+{
+  "parapharma.ma": {
+    "category": {
+      "product_links": ".products article.product-miniature a"
+    },
+    "product": {
+      "title": ".product-container h1.h1",
+      "price": ".current-price .current-price-value",
+      "description": ".product-description",
+      "brand": ".product-reference span",
+      "category": ".breadcrumb li a span",
+      "reference": ".sku",
+      "images": ".product-container .product-cover img"
+    }
+  },
+  "kingphar.ma": {
+    "category": {
+      "product_links": "#products article h3.product-title a"
+    },
+    "product": {
+      "title": ".product_right h1.product_name",
+      "price": ".current-price span.price",
+      "short_description": ".product-information .product_desc p",
+      "description": "#description .product-description",
+      "brand": "#product_manufacturer a span",
+      "reference": ".sku",
+      "images": ".images-container .product-cover img"
+    }
+  },
+  "novapara.ma": {
+    "category": {
+      "product_links": ".sf__product-listing .sf__pcard .sf__pcard-content h3 a"
+    },
+    "product": {
+      "title": ".prod__title h1",
+      "price": ".product-prices span.prod__price",
+      "description": ".sf__accordion-item[data-block-type='description'] .sf__accordion-content .prose",
+      "brand": "#product_manufacturer a span",
+      "reference": ".sku",
+      "images": ".sf-prod-media .sf-image img"
+    }
+  }
+}

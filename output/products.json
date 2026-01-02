@@ -1,0 +1,19 @@
+
+
+{
+  "parapharma.ma": {
+    "category": {
+      "product_links": ".products article.product-miniature a",
+      "pagination": ".pagination .pagination-page-list a.js-search-link"
+    },
+    "product": {
+      "title": ".product-container h1.h1",
+      "description": ".product-description",
+      "brand": ".product-manufacturer span a",
+      "category": ".breadcrumb li a span",
+      "reference": ".sku",
+      "price": ".current-price .current-price-value",
+      "images": ".product-images li.thumb-container img"
+    }
+  }
+}
