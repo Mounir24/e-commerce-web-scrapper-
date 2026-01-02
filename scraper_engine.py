@@ -61,7 +61,7 @@ def extract_categories_hierarchy(soup):
 # CATEGORY SCRAPER (FAST + PAGINATION SAFE)
 # --------------------------------------------------
 
-def collect_product_links(category_url, config, max_pages=200):
+def collect_product_links(category_url, config, max_pages=1):
     product_links = set()
     current_page = category_url
     page_number = 1

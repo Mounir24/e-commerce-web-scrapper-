@@ -2,12 +2,15 @@ import sys
 import json
 from urllib.parse import urlparse
 
-from scraper_engine import collect_product_links, scrape_products_fast
+from scraper_engine import collect_product_links, scrape_products_fast, scrape_product
 from integrations.push_products import push_products_to_woocommerce, push_products_batch
 from exporters.woo_csv import export_to_csv
 
 import sys
 sys.stdout.reconfigure(encoding="utf-8")
+from utils.formater import human_delay
+from tqdm import tqdm
+
 
 
 def main():
@@ -38,14 +41,25 @@ def main():
     print(f"Found {len(product_urls)} products\n")
 
     #Scrape products (FAST -  Multi-Thread)
-    products = scrape_products_fast(product_urls, config, workers=8)
+    ###products = scrape_products_fast(product_urls, config, workers=8)
+
+    products = []
+
+    for url in tqdm(product_urls, desc="Scraping products", unit="product"):
+        product = scrape_product(url, config)
+
+        if product:
+            products.append(product)
+
+        human_delay()
 
     if not products:
         print("No products scraped.")
         sys.exit(1)
 
+    
     #Push to Woocommerce REST API (Single product / Batch products push)
-    push_products_batch(products)
+    ###push_products_batch(products)
 
     print("\nDone! Products exported & pushed to WooCommerce (CERMEP.COM)")
 

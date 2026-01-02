@@ -1,5 +1,7 @@
 import html
 import re
+import time
+import random
 
 
 # --------------------------------------------------
@@ -18,6 +20,10 @@ def clean_text(text: str) -> str:
 
     return text.strip()
 
+
+### Humain Delay - Rate Limiting Defense
+def human_delay(min_s=2, max_s=5):
+    time.sleep(random.uniform(min_s, max_s))
 
 
 # --------------------------------------------------
