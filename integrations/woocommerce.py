@@ -33,6 +33,36 @@ class WooCommerceClient:
             json=payload,
             timeout=30
         )
+    
+    ### Reterieve Products 
+    def retrieve_products(
+        self,
+        category_id: int,
+        page: int = 1,
+        per_page: int = 20,
+        status: str = 'publish'
+    ):
+
+        params = {
+            "category": category_id,
+            "page": page,
+            "per_page": per_page,
+            "status": status
+        }
+
+        r = self.session.get(
+            f"{self.base_url}/products",
+            params=params,
+            timeout=30
+        )
+
+        if not r.ok:
+            raise Exception(
+                f"Failed fetching products (category={category_id}, page={page}) → {r.text}"
+            )
+
+        return r.json()
+
 
     def update_product(self, product_id, payload):
         return self.session.put(
@@ -49,7 +79,7 @@ class WooCommerceClient:
         )
     
     ### Products Brands Scrapping & Pushing handling
-    # 🔹 CHANGE taxonomy if your site uses another one
+    # CHANGE taxonomy if your site uses another one
 
     BRAND_TAXONOMY = "product_brand"  # sometimes: "pa_brand", "product_brand"
 

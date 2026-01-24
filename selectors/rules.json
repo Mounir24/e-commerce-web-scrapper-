@@ -1,0 +1,12 @@
+{
+    "remove_selectors": [
+        ".source-brand",
+        ".manufacturer-info",
+        "#delivery-info",
+        ".technical-footer"
+    ],
+    "replace_text": {
+        "OriginalBrandName": "CERMEP",
+        "Source Website Name": "Nova"
+    }
+}
