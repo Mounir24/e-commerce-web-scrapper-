@@ -12,7 +12,7 @@ wc = WooCommerceClient()
 
 logger = setup_logger()
 
-def process_category(category_id = 390):
+def process_category(category_id = 163):
     page = 1
     total_processed = 0
 
@@ -69,7 +69,7 @@ def process_category(category_id = 390):
                 total_processed += 1
 
                 ### Prevent Rate-limiting issue
-                time.sleep(0.35)
+                time.sleep(0.45)
 
             except Exception as e:
                 logger.exception(

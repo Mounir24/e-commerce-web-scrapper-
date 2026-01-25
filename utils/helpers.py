@@ -2,16 +2,32 @@ import re
 from bs4 import BeautifulSoup
 
 ### Detect Product Description (Text-based / Rich-HTML)
-def detect_description_type(description: str) -> str:
-    if not description:
-        return 'empty'
+SIMPLE_TAGS = {"p", "br", "strong", "b", "em", "i", "u", "span"}
+RICH_TAGS = {"div", "section", "article", "ul", "ol", "li", "figure"}
+IGNORED_TAGS = {"html", "body"}
 
-    # If it contains HTML tags (Rich HTML)
-    if "<" in description and ">" in description:
+def detect_description_type(description: str) -> str:
+    if not description or not description.strip():
+        return "empty"
+
+    # Pure text
+    if "<" not in description and ">" not in description:
+        return "text"
+
+    soup = BeautifulSoup(description, "lxml")
+
+    found_tags = set(tag.name for tag in soup.find_all(True) if tag.name not in IGNORED_TAGS)
+
+    # Rich html
+    if found_tags & RICH_TAGS:
         return "html"
 
-    # Text-based type
-    return "text"
+    # Treat as text
+    if found_tags.issubset(SIMPLE_TAGS):
+        return "text"
+
+    # Fallback safety
+    return "html"
 
 
 ### Plain text description processing (Text-based)
@@ -32,14 +48,14 @@ def process_text_description(text: str) -> str:
 UNWANTED_BLOCKS = [
     "livraison rapide",
     "conseil expert nova",
-    "Livraison & Paiement Nova Parapharmacie",
+    "Livraison & Paiement",
     "votre pharmacien Nova Parapharmacie",
-    "nova para",
     "Prix de vente",
     "Prix Nova Para",
     "CONSEIL EXPERT NOVA PARA",
     "POURQUOI CHOISIR NOVA PARA",
-    "OFFRE EXCEPTIONNELLE NOVA PARA"
+    "OFFRE EXCEPTIONNELLE NOVA PARA",
+    "Livraison Premium"
 ]
 def process_html_description(html: str) -> str:
     html = remove_block_by_text(
@@ -51,7 +67,7 @@ def process_html_description(html: str) -> str:
 
 
 ### Decompose Unwanted Blocks by Providing Text keywords String
-BLOCK_TAGS_PRIORITIES = ['div', 'section', 'ul', 'p', 'article']
+BLOCK_TAGS_PRIORITIES = ['div', 'section', 'ul', 'p','h2', 'article']
 def remove_block_by_text(html: str, keywords: list) -> str:
     soup = BeautifulSoup(html, "lxml")
     parents_to_remove = set()

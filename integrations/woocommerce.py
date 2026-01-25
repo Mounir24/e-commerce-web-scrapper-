@@ -53,7 +53,7 @@ class WooCommerceClient:
         r = self.session.get(
             f"{self.base_url}/products",
             params=params,
-            timeout=30
+            timeout=50
         )
 
         if not r.ok:
@@ -68,7 +68,7 @@ class WooCommerceClient:
         return self.session.put(
             f"{self.base_url}/products/{product_id}",
             json=payload,
-            timeout=30
+            timeout=50
         )
     
     def batch_products(self, payload):
