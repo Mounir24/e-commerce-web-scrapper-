@@ -4,9 +4,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-WC_API_URL = os.getenv("WC_API_URL")
-WC_KEY = os.getenv("WC_CONSUMER_KEY")
-WC_SECRET = os.getenv("WC_CONSUMER_SECRET")
+WC_API_URL = os.getenv("WC_PROD_API_URL") ### Note: Production/Development Environment
+WC_KEY = os.getenv("WC_PROD_CONSUMER_KEY")
+WC_SECRET = os.getenv("WC_PROD_CONSUMER_SECRET")
 
 
 class WooCommerceClient:
