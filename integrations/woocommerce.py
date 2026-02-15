@@ -39,7 +39,7 @@ class WooCommerceClient:
         self,
         category_id: int,
         page: int = 1,
-        per_page: int = 20,
+        per_page: int = 50,
         status: str = 'publish'
     ):
 
